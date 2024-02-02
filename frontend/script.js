@@ -16,3 +16,6 @@ function fadeOutAndNavigate() {
     window.location.href = "page.html";
   }, 3000); 
 }
+
+
+
