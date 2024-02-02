@@ -26,6 +26,6 @@ def chaos(prompt):
 
 
 if __name__=="__init__":
-    prompt=frontendselamadarchod
-    chaos(prompt)
-    
+    #prompt=frontendselamadarchod
+    #chaos(prompt)
+    pass
