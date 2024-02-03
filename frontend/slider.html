@@ -8,28 +8,50 @@
 </head>
 <body>
     <div class="Part2">
-        <div class="Container1">
-            <h1>Section 1</h1>
-            <div class="Button">
-                <p>Click Me</p>
-            </div>
-            <div class="Item1">
-                <p>Item 1</p>
-            </div>
-            &nbsp;&nbsp;&nbsp;
-            <div class="Item2">
-                <p>Item 2</p>
-            </div>
-            &nbsp;&nbsp;&nbsp;
-            <div class="Item3">
-                <p>Item 3</p>
-            </div>
-            &nbsp;&nbsp;&nbsp;
-            <div class="Item4">
-                <p>Item 4</p>
-            </div>
-        </div>
     </div>
+<script>
+    // Define the number of sections and items per section
+    var numSections = 5;
+    var numItemsPerSection = 4;
+    
+    // Reference the parent container
+    var part2Container = document.querySelector('.Part2');
+
+    // Loop to create sections and items dynamically
+    for (var i = 1; i <= numSections; i++) {
+        var containerDiv = document.createElement('div');
+        containerDiv.classList.add('Container' + i);
+
+        var h1 = document.createElement('h1');
+        h1.textContent = 'Section ' + i;
+        containerDiv.appendChild(h1);
+
+        var buttonDiv = document.createElement('div');
+        buttonDiv.classList.add('Button');
+        var buttonP = document.createElement('p');
+        buttonP.textContent = 'View more';
+        buttonDiv.appendChild(buttonP);
+        containerDiv.appendChild(buttonDiv);
+
+        for (var j = 1; j <= numItemsPerSection; j++) {
+            var itemDiv = document.createElement('div');
+            itemDiv.classList.add('Item' + j);
+            var itemP = document.createElement('p');
+            itemP.textContent = 'Item ' + j;
+            itemDiv.appendChild(itemP);
+            containerDiv.appendChild(itemDiv);
+
+            // Add non-breaking space after each item except the last one
+            if (j < numItemsPerSection) {
+                containerDiv.appendChild(document.createTextNode('\u00A0\u00A0\u00A0'));
+            }
+        }
+
+        // Append the container to the parent container
+        part2Container.appendChild(containerDiv);
+    }
+</script>
+
 <script src="slider.js"></script>
 
 </body>

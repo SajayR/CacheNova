@@ -5,25 +5,30 @@ body {
 }
 
 .Part2 {
-  background-color: #0a0a0a;
-  height: 1000px;
-  position: relative;
+  background-color: black;
+  min-height: 100vh; /* Set minimum height to viewport height */
+  display: flex;
+  flex-direction: column; /* Stack containers vertically */
+  align-items: center; /* Center containers horizontally */
+  justify-content: center; /* Center containers vertically */
 }
 
-.Container1 {
-  position: absolute;
-  top: 25vh;
-  left: 13vw;
+.Container1, .Container2, .Container3, .Container4, .Container5 {
+  margin-top: 50px; /* Adjust spacing between sections */
   color: white;
   font-family: 'Sofia Sans Semi Condensed', sans-serif;
 }
 
-.Container1 .Button, .Container1 .Item1, .Container1 .Item2, .Container1 .Item3, .Container1 .Item4 {
+.Container1 .Button, .Container2 .Button, .Container3 .Button, .Container4 .Button, .Container5 .Button,
+.Container1 .Item1, .Container2 .Item1, .Container3 .Item1, .Container4 .Item1, .Container5 .Item1,
+.Container1 .Item2, .Container2 .Item2, .Container3 .Item2, .Container4 .Item2, .Container5 .Item2,
+.Container1 .Item3, .Container2 .Item3, .Container3 .Item3, .Container4 .Item3, .Container5 .Item3,
+.Container1 .Item4, .Container2 .Item4, .Container3 .Item4, .Container4 .Item4, .Container5 .Item4 {
   padding-left: 5px;
   border: 2px solid black;
 }
 
-.Container1 .Button:hover {
+.Container1 .Button:hover, .Container2 .Button:hover, .Container3 .Button:hover, .Container4 .Button:hover, .Container5 .Button:hover {
   padding-left: 5px;
   border: 3px solid transparent;
   border-radius: 16px;
@@ -32,29 +37,23 @@ body {
   animation: anime 10s linear infinite iteration-count direction fill-mode;
 }
 
-.Container1 .Button {
+.Container1 .Button, .Container2 .Button, .Container3 .Button, .Container4 .Button, .Container5 .Button {
   background-color: #0a0a0a;
   font-size: smaller;
   border: 1px solid white;
-  width: 60px;
+  width: 70px;
   text-align: center;
   border-radius: 10px;
-  position: absolute;
-  top: -3vh;
-  right: 0;
-  transition: all 0.5s ease; /* Add smooth transition */
+  transition: all 0.5s ease; 
 }
 
-.Container1 .Button:hover {
+.Container1 .Button:hover, .Container2 .Button:hover, .Container3 .Button:hover, .Container4 .Button:hover, .Container5 .Button:hover {
   background-color: #0a0a0a;
   font-size: smaller;
   border: 0.5px solid green;
-  width: 60px;
+  width: 70px;
   text-align: center;
   border-radius: 10px;
-  position: absolute;
-  top: -3vh;
-  right: -10px;
   color: rgb(53, 255, 53);
   cursor: pointer;
 }
@@ -86,4 +85,10 @@ body {
 
 .Item4 {
   background-image: linear-gradient(to bottom right, #da434e, #f27581);
+}
+
+.Container5 {
+  margin-bottom: 50px; /* Add margin at the bottom */
+  color: white;
+  font-family: 'Sofia Sans Semi Condensed', sans-serif;
 }
