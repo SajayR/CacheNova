@@ -183,6 +183,7 @@ body {
 
 .loading-text {
   color: white;
+  top: -100px;
   font-size: 24px;
   text-align: center;
   font-family: 'Inconsolata', monospace;

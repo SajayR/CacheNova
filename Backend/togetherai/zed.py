@@ -58,7 +58,7 @@ def getsubjects(prompt: str) -> list:  #["Physics", "Mathematics", "Chemistry"]
     return list(json.loads(response.choices[0].message.content).values())
 
 
-def getsubfields(subject, prompt) -> dict:   #{1: "Gravitational Constant", 2: "Gravitational Field", 3: "Gravitational Potential"}
+def getsubfields(subject, prompt, restofthesubjects) -> dict:   #{1: "Gravitational Constant", 2: "Gravitational Field", 3: "Gravitational Potential"}
     response = openai_client.chat.completions.create(
     model="gpt-3.5-turbo-0125",
     response_format={ "type": "json_object" },
