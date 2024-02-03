@@ -13,6 +13,7 @@ from openai import OpenAI
 client = OpenAI()
 import random
 import string
+from gottadealwithfrontend import converter
 
 
 endpoint = 'https://api.together.xyz/v1/chat/completions'
@@ -90,7 +91,7 @@ def get_subsections(subject, subfield, subtopic):
     )
     return list(json.loads(response.choices[0].message.content).values())
 
-def generatepages(subject:str, subfield:str, subtopics: list):
+def generatepages(subject:str, subfield:str, subtopics: list, subtopiclinks: list, navbarcontent: list):
     listoflinks_tosubtopicpages=[]
     print(subtopics)
     for subtopic in subtopics:
@@ -99,7 +100,7 @@ def generatepages(subject:str, subfield:str, subtopics: list):
         #   listoflinks_tosubtopicpages.append({subtopic: db[subtopic]})
         #else:
 
-        filename = generate_random_string()
+        filename = subtopiclinks[subtopic]
         with open(f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md", "w") as md_file:  # Open a markdown file for writing
             subsections = get_subsections(subject, subfield, subtopic)
             for i in range(len(subsections)):
@@ -124,6 +125,8 @@ def generatepages(subject:str, subfield:str, subtopics: list):
                     )
                     md_file.write(res.choices[0].message.content + "\n\n")  # Write the content to the markdown file
                     listoflinks_tosubtopicpages.append({subtopic: f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md"})
+                    
                     break
 
+    listoflinks_tosubtopicpages = [{'title': subtopic, 'link': converter.convplease(f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md", navbarcontent)} for subtopic in subtopics]
     return listoflinks_tosubtopicpages
