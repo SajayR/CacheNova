@@ -1,0 +1,217 @@
+
+
+.Part2 {
+    background-color: #0a0a0a;
+    height: 1000px;
+    z-index: 3px;
+    z-index: -10;
+  }
+  
+  .Preorder {
+    display: inline-block;
+    padding-left: 200px;
+    color: white;
+  }
+  
+  .Preoder_Para {
+    display: inline-block;
+    padding-left: 24px;
+    padding-top: 14px;
+    font-weight: lighter;
+    color: rgb(172, 172, 172);
+  }
+  
+  .Preorder h2 {
+    padding-top: 37px;
+    padding-left: 25px;
+    font-weight: light;
+    word-spacing: 1px;
+    font-size: 25px;
+    letter-spacing: 1px;
+  }
+  
+  .Preorder_Words {
+    position: relative;
+    top: -41vh;
+    right: -46vw;
+    text-align: left;
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    border: 1.5px solid gray;
+    height: 40vh;
+    width: 32vw;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  
+  .Data_Structures {
+    position: relative;
+    top: -25vh;
+    left: 13vw;
+    color: white;
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    z-index: -0;
+  }
+  
+  .Data_Structures .Dsa {
+    padding-left: 5px;
+    border: 2px solid black;
+  }
+  
+  .Dsa:hover {
+    padding-left: 5px;
+    border: 3px solid transparent;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 1px 1px 8px silver;
+    animation: anime 10s linear infinite iteration-count direction fill-mode;
+  }
+  
+  .ViewAll {
+    background-color: #0a0a0a;
+    font-size: smaller;
+    border: 1px solid white;
+    width: 60px;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+    top: -3vh;
+    left: 67vw;
+  }
+  
+  .ViewAll :hover {
+    transition: 1s ease;
+    background-color: #0a0a0a;
+    font-size: smaller;
+    border: 0.5px solid green;
+    width: 60px;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+    top: -3vh;
+    left: 66vw;
+    color: rgb(53, 255, 53);
+  }
+  
+  .DS_Array {
+    background-image: linear-gradient(to bottom right, #208cd4, #52d2f3);
+    width: 17vw;
+    height: 20vh;
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-size: 23px;
+  }
+  
+  
+  
+  .DS_LinkedList {
+    background-image: linear-gradient(to bottom right, #3d9682, #57d0ba);
+    width: 17vw;
+    height: 20vh;
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-size: 23px;
+  }
+  
+  .DS_Stack {
+    background-image: linear-gradient(to bottom right, #d59434, #fabc4b);
+    width: 17vw;
+    height: 20vh;
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-size: 23px;
+  }
+  
+  .DS_Queue {
+    background-image: linear-gradient(to bottom right, #da434e, #f27581);
+    width: 17vw;
+    height: 20vh;
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-size: 23px;
+  }
+  
+  .AlgoRithms {
+    position: relative;
+    top: -15vh;
+    left: 13vw;
+    color: white;
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+  }
+  
+  
+  .AnalysisofAlgo {
+    background-image: linear-gradient(to bottom right, #da434e, #f27581);
+    width: 17vw;
+    height: 20vh;
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-size: 23px;
+  }
+  
+  .SearchAlgo {
+    width: 17vw;
+    background-image: linear-gradient(to bottom right, #208cd4, #52d2f3);
+    height: 20vh;
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-size: 23px;
+  }
+  
+  .SortingAlgo {
+    background-image: linear-gradient(to bottom right, #3d9682, #57d0ba);
+    width: 17vw;
+    height: 20vh;
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-size: 23px;
+  }
+  
+  .GraphAlgo {
+    background-image: linear-gradient(to bottom right, #d59434, #fabc4b);
+    width: 17vw;
+    height: 20vh;
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: 'Sofia Sans Semi Condensed', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-size: 23px;
+  }
+  
