@@ -1,183 +1,143 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: black; /* Consistent dark background */
+    color: #ccc; /* Light grey text for readability */
+    font-family: 'Arial', sans-serif; /* Clean, sans-serif font */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+h1.neon-text {
+    z-index: 1000;
+    color: #fff; /* White color for heading */
+    font-size: 2rem; /* Adjusted font size for elegance */
+    text-align: center; /* Center align the text */
+    margin: 0; /* No margin to ensure spacing is controlled */
+    padding: 40px 0; /* Padding to create space around the text */
+    background-color: #333; /* Darker background for the header */
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Include padding and borders in the width */
 }
-@keyframes slideIn {
-    0% {
-        opacity: 0;
-        transform: scale(.98);
-    }
-    35% {
-        transform: scale(1);
-    }
-    100% {
-        opacity: 1;
-    }
+
+.navigation-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    overflow: auto; /* Enable scrolling if content exceeds viewport */
+    padding: 20px; /* Add padding to keep content away from edges */
+    box-sizing: border-box; /* Include padding and borders in the width */
 }
-@keyframes height {
-    from { transform: translateY(-100%); transform-origin: top; top: -100%; position: relative; height: 0; }
-    to { transform: translateY(0); transform-origin: top; top: 0; position: relative; height: 800px; }
-}
-.paris-2015-special {
-    -webkit-font-smoothing: antialiased;
-    background-color: #101010;
-    background-image: url("https://i2.cdn.turner.com/cnn/2015/images/11/16/background.jpg");
-    background-position:top center;
-    background-repeat: no-repeat;
-    background-size: 200%;
-    color: #d9d9d9;
-    font-family: CNN, "Helvetica Neue", Helvetica, Arial, Utkal, sans-serif;
-    font-family: "Helvetica Neue";
-    font-weight: 400;
-    padding: 2rem 2rem 0;
-    animation: .5s ease-in-out .5s 1 normal backwards running height, 1s ease-in-out 1s 1 normal backwards running fadeIn;
+
+.nav-section {
+    background-color: #252526; /* Dark gray background */
+    border-radius: 8px;
     overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    flex-grow: 1;
+    margin: 10px;
+    min-width: 300px;
+    max-width: 400px;
+    height: 500px; /* Fixed height for each section */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    box-sizing: border-box; /* Include padding and borders in the width */
 }
-.special-link {
-    color: inherit;
-    text-decoration: inherit;
+
+.nav-section:hover {
+    transform: scale(1.03);
 }
-.special-link:hover {
-    color: inherit;
-}
-.paris-logo {
-    animation: 2s ease-in-out 1s 1 normal both running slideIn;
-    display: block;
-    height: 116px;
-    margin: 0 auto;
-    padding: 0 0 2rem;
-    text-align: center;
-    width: 75px;
-}
-.title {
-    animation: 2s ease-in-out 1s 1 normal both running slideIn;
-    font-size: .6em;
-    padding: 0 0 2rem;
-    text-align: center;
-    text-transform: uppercase;
-}
-.title__in-memoriam {
-    font-size: 1.55em;
-    font-weight: 200;
-    letter-spacing: .4em;
-}
-.title__paris-attacks {
-    color: #fefefe;
-    font-size: 1.6em;
-    letter-spacing: .15em;
-}
-.title__etch {
-    background: #868686;
-    display: inline-block;
-    height: 1px;
-    left: -.15em;
-    margin: 0 1em;
-    position: relative;
-    top: -.25em;
-    width: 20px;
-}
-.title__etch:nth-child(odd) {
-    margin-left: 0;
-}
-.title__etch:nth-child(even) {
-    margin-right: 0;
-}
-.victims-intro {
-    animation: 3.5s ease-in-out 1.02s 1 normal both running slideIn;
-    font-size: 1.15em;
-    font-weight: 400;
-    line-height: 1.5;
-    margin: 0 auto;
-    max-width: 800px;
-    padding: 0 1rem 3rem;
+
+.nav-title {
+    background-color: #007acc; /* Dark blue */
+    color: #ffffff; /* White text */
+    padding: 15px;
+    margin: 0;
+    font-size: 1.2rem;
     text-align: center;
 }
-.list-name {
-    list-style: none;
-    margin: 0 auto;
-    max-width: 1050px;
-    padding: 0 0 3rem;
+
+.nav-items {
+    list-style-type: none;
+    align-items: center;
     text-align: center;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto; /* Scroll inside the container if content overflows */
+    flex-grow: 1;
 }
-.name {
-    font-size: .9em;
-    font-weight: 500;
-    letter-spacing: .06em;
-    margin: 1rem 1rem;
-    text-transform: uppercase;
-}
-.name:nth-child(2n) {
-    animation: 2.5s ease-in-out 2.35s 1 normal both running fadeIn;
-}
-.name:nth-child(2n+1) {
-    animation: 2s ease-in-out 2.25s 1 normal both running fadeIn;
 
+.nav-items li {
+    padding: 10px 15px;
+    border-bottom: 1px solid #333; /* Dark gray border */
+    color: #ccc; /* Light gray text */
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
 }
-.name:nth-child(5n-2) {
-    animation: 2.5s ease-in-out 2.15s 1 normal both running fadeIn;
-}
-.name:nth-child(5n) {
-    animation: 3.0s ease-in-out 2.05s 1 normal both running fadeIn;
 
+.nav-items li:hover {
+    background-color: #007acc; /* Dark blue */
+    color: #ffffff; /* White text */
+    cursor: pointer;
 }
-.name:nth-child(10n-6) {
-    animation: 2.5s ease-in-out 1.95s 1 normal both running fadeIn;
 
+/* Scrollbar styling */
+.nav-items::-webkit-scrollbar {
+    width: 5px;
 }
-.name:nth-child(10n-3) {
-    animation: 3.5s ease-in-out 1.85s 1 normal both running fadeIn;
 
+.nav-items::-webkit-scrollbar-track {
+    background: #202122; /* Dark gray */
 }
-.name:nth-child(10n) {
-    animation: 3.5s ease-in-out 1.75s 1 normal both running fadeIn;
 
+.nav-items::-webkit-scrollbar-thumb {
+    background: #555; /* Medium gray */
 }
-.credit {
-    color: #737373;
-    font-size: .9em;
-    font-style: italic;
-    font-weight: 300;
-    letter-spacing: .05em;
-    padding: 2rem 0;
-    text-align: center;
+
+.nav-items::-webkit-scrollbar-thumb:hover {
+    background: #777; /* Light gray on hover */
 }
-.credit__link {
-    color: #006598;
-    text-decoration: none;
-}
-.credit__divider {
-    border-top: 1px solid #737373;
-    width: 100px;
-    border-bottom: none;
-}
-@media (min-width: 640px) {
-    .paris-2015-special {
-        background-size: contain;
-    }
-    .paris-logo {
-        width: 100px;
-        height: 144px;
-    }
-    .title {
-        font-size: 1em;
-    }
-    .title__in-memoriam {
-        font-size: 1.3em;
+
+/* Existing styles remain unchanged */
+
+@media (hover: hover) {
+    .nav-items::-webkit-scrollbar {
+        width: 5px; /* Narrow scrollbar for non-intrusive scrolling */
     }
 
-    .title__etch {
-        margin: 0 1.5rem;
-        width: 60px;
+    .nav-items::-webkit-scrollbar-track {
+        background: #202122; /* Dark track to maintain the overall dark theme */
     }
-    .victims-intro {
-        font-size: 1.5em;
-        font-weight: 200;
-        line-height: 1.25;
-        padding: 0 5rem 3rem;
+
+    .nav-items::-webkit-scrollbar-thumb {
+        background: #555; /* Medium gray thumb for contrast */
     }
-    .name {
-        display: inline-block;
-        font-size: 1.125em;
+
+    .nav-items::-webkit-scrollbar-thumb:hover {
+        background: #777; /* Lighter gray on hover for visual feedback */
+    }
+}
+
+/* Mobile-specific styles */
+@media (max-width: 576px) {
+    .navigation-container {
+        margin-top: 0; /* Adjusted to 0 for mobile */
+        height: calc(100vh - 60px); /* Height minus header and padding */
+    }
+}
+
+    .navigation-container {
+        height: calc(100vh - 60px); /* Height minus header and padding */
+    }
+
+    .nav-section {
+        width: calc(100% - 20px); /* Full width minus padding for edge-to-edge design */
+    }
+
+    .nav-items li {
+        padding: 10px 15px; /* Slightly smaller padding for more screen real estate */
     }
 }
