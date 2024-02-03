@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status</title>
+  <!-- Link to Swiper CSS -->
+  <link rel="stylesheet" href="status.css">
+</head>
+<body>
+<script>
+  // Function to create and append cards
+  function createCards() {
+    var container = document.body; // Get the body element
+
+    // Loop to create 50 cards
+    for (var i = 0; i < 52; i++) {
+      if (i % 4 === 0) { // Create a new row container for every 4 cards
+        var row = document.createElement('div');
+        row.classList.add('row');
+        container.appendChild(row);
+      }
+
+      var card = document.createElement('div'); 
+      card.classList.add('card'); 
+
+      var iconContainer = document.createElement('div'); // Create a div for the icon container
+      iconContainer.classList.add('icon-container'); // Add the 'icon-container' class
+      var loadingIcon = document.createElement('div'); // Create a div for the loading icon
+      loadingIcon.classList.add('loading-icon', 'pendulum'); // Add classes for the loading icon
+      iconContainer.appendChild(loadingIcon); // Append the loading icon to the icon container
+
+      var description = document.createElement('div'); // Create a div for the description
+      description.classList.add('description'); // Add the 'description' class
+      var name = document.createElement('div'); // Create a div for the name
+      name.classList.add('name'); // Add the 'name' class
+      name.textContent = 'Pendulum'; // Set the text content for the name
+      var code = document.createElement('code'); // Create a code element
+      code.textContent = 'cubic-bezier(0.3, 1.65, 0.7, -0.65)'; // Set the text content for the code element
+      description.appendChild(name); // Append the name to the description
+      description.appendChild(code); // Append the code to the description
+
+      card.appendChild(iconContainer); // Append the icon container to the card
+      card.appendChild(description); // Append the description to the card
+
+      row.appendChild(card); // Append the card to the row
+    }
+  }
+
+  // Call the function to create cards
+  createCards();
+</script>
+
+</body>
+</html>
