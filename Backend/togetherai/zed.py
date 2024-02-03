@@ -10,11 +10,14 @@
 import requests
 import json
 from openai import OpenAI
-client = OpenAI()
+openai_client = OpenAI()
 import random
 import string
 from gottadealwithfrontend import converter
-
+from pymongo import MongoClient
+client = MongoClient('localhost', 27017)
+db = client['Nova']
+#subficol = db['subfields']
 
 endpoint = 'https://api.together.xyz/v1/chat/completions'
 
@@ -43,7 +46,7 @@ def cleanprompt(prompt, maxlength=20):
     return res.json()['choices'][0]['message']['content']
 
 def getsubjects(prompt: str) -> list:  #["Physics", "Mathematics", "Chemistry"]
-    response = client.chat.completions.create(
+    response = openai_client.chat.completions.create(
     model="gpt-3.5-turbo-0125",
     response_format={ "type": "json_object" },
     messages=[
@@ -55,7 +58,7 @@ def getsubjects(prompt: str) -> list:  #["Physics", "Mathematics", "Chemistry"]
 
 
 def getsubfields(subject, prompt) -> dict:   #{1: "Gravitational Constant", 2: "Gravitational Field", 3: "Gravitational Potential"}
-    response = client.chat.completions.create(
+    response = openai_client.chat.completions.create(
     model="gpt-3.5-turbo-0125",
     response_format={ "type": "json_object" },
     messages=[
@@ -66,7 +69,7 @@ def getsubfields(subject, prompt) -> dict:   #{1: "Gravitational Constant", 2: "
     return list(json.loads(response.choices[0].message.content).values())
 
 def getsubtopics(subfield, subject, prompt) -> dict:   #{1: "Gravitational Constant", 2: "Gravitational Field", 3: "Gravitational Potential"}
-    response = client.chat.completions.create(
+    response = openai_client.chat.completions.create(
     model="gpt-3.5-turbo-0125",
     response_format={ "type": "json_object" },
     messages=[
@@ -81,7 +84,7 @@ def generate_random_string(length=10):
         return ''.join(random.choice(characters) for i in range(length))
 
 def get_subsections(subject, subfield, subtopic):
-    response = client.chat.completions.create(
+    response = openai_client.chat.completions.create(
     model="gpt-3.5-turbo-0125",
     response_format={ "type": "json_object" },
     messages=[
@@ -91,8 +94,12 @@ def get_subsections(subject, subfield, subtopic):
     )
     return list(json.loads(response.choices[0].message.content).values())
 
+
+
+
 def generatepages(subject:str, subfield:str, subtopics: list, subtopiclinks: list, navbarcontent: list):
     listoflinks_tosubtopicpages=[]
+    subficol = db[subfield]
     print(subtopics)
     for subtopic in subtopics:
         #implement the following
@@ -106,7 +113,7 @@ def generatepages(subject:str, subfield:str, subtopics: list, subtopiclinks: lis
             for i in range(len(subsections)):
                 if i!=len(subsections)-1:
                     sec = subsections[i]
-                    res = client.chat.completions.create(
+                    res = openai_client.chat.completions.create(
                     model="gpt-3.5-turbo-0125",
                     messages=[
                     {"role": "system", "content": "You are a co-writer on a university book. When asked to write a section, you will write an extremely lengthy, detailed, and well-researched section on the topic, properly formatted with markdown format"},
@@ -116,7 +123,7 @@ def generatepages(subject:str, subfield:str, subtopics: list, subtopiclinks: lis
                     md_file.write(res.choices[0].message.content + "\n\n")  # Write the content to the markdown file
                 else:
                     sec = subsections[i]
-                    res = client.chat.completions.create(
+                    res = openai_client.chat.completions.create(
                     model="gpt-3.5-turbo-0125",
                     messages=[
                     {"role": "system", "content": "You are a co-writer on a university book. When asked to write a section, you will write an extremely lengthy, detailed, and well-researched section on the topic, properly formatted with markdown format"},
@@ -124,9 +131,13 @@ def generatepages(subject:str, subfield:str, subtopics: list, subtopiclinks: lis
                     ]
                     )
                     md_file.write(res.choices[0].message.content + "\n\n")  # Write the content to the markdown file
+                    md_file.close()
+                    subficol.update_one(
+                        {"subfield": subfield},
+                        {"$push": {"subtopics": {"title": subtopic, "link": converter.convplease(f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md", navbarcontent)}}},
+                        upsert=True
+                        )
                     listoflinks_tosubtopicpages.append({subtopic: f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md"})
-                    
-                    break
 
-    listoflinks_tosubtopicpages = [{'title': subtopic, 'link': converter.convplease(f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md", navbarcontent)} for subtopic in subtopics]
+    #listoflinks_tosubtopicpages = [{'title': subtopic, 'link': converter.convplease(f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md", navbarcontent)} for subtopic in subtopics]
     return listoflinks_tosubtopicpages

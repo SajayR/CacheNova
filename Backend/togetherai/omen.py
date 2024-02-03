@@ -25,7 +25,7 @@ def threadchaos(prompt, subject):
     subjectpage = generate_random_string()
     subfields = zed.getsubfields(subject, prompt) #returns a list of strings
     subcol = db[subject]
-    subcol.insert_one({"subject":subject, "subjectpage": subjectpage, "subfields": subfields})
+    subcol.insert_one({"type": "subject", "subject":subject, "subjectpage": subjectpage, "subfields": subfields})
     for subfield in subfields:
         #implement the following
         #if subfield in db:
@@ -44,11 +44,12 @@ def threadchaos(prompt, subject):
         #return the link to the page
         #add the following to the subfield collection
         #subfield:[{subtopic1, link1}, {subtopic2, link2}, {subtopic3, link3}]
+        subficol.insert_one({"type": "subfield", "subfield":subfield, "subfieldpage": subfieldpage, "subtopics":[]})
         linkstosubtopic=zed.generatepages(subject, subfield, subtopics, subtopiclinks, navbarcontent) #should return a list of dicts of name of subtopic as key and link as value
         #holds the form [{subtopic1: link1}, {subtopic2: link2}, {subtopic3: link3}]
 
     
-        subficol.insert_one({"subfield":subfield, "subfieldpage": subfieldpage, "subtopics":linkstosubtopic})
+        #subficol.insert_one({"subfield":subfield, "subfieldpage": subfieldpage, "subtopics":linkstosubtopic})
         #add the following to the subject collection
         #linkstosubtopic holds list of dicts of title key holding subtopic, link key holding entire path to subtopic
     return None

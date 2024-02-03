@@ -1,9 +1,15 @@
-import execjs
-import asyncio
-from pyppeteer import launch
-import nest_asyncio
-nest_asyncio.apply()
+import subprocess
 import json
+import asyncio
+
+import json
+import sys
+
+import json
+import markdown2
+
+
+
 
 scriptcontentpart = """function populateNavbar(content) {
             const navbarList = document.querySelector('#navbar .navlist');
@@ -13,7 +19,9 @@ scriptcontentpart = """function populateNavbar(content) {
                 const listItem = document.createElement('li');
                 const link = document.createElement('a');
                 link.classList.add('nav-link');
-                link.href = `#${item.link}`;
+                //link.href = `#${item.link}`;
+                //link.href = 
+                link.href = '/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/htmldatacluster/' + item.link + ".html";
                 link.textContent = item.title;
                 listItem.appendChild(link);
                 navbarList.appendChild(listItem);
@@ -26,26 +34,16 @@ scriptcontentpart = """function populateNavbar(content) {
             document.getElementById('navbar').classList.toggle('active');
         });"""
 
-async def convert_markdown_to_html(markdown_path, navbar_content):
+def convert_markdown_to_html(markdown_path, navbar_content):
     # Read the Markdown file
     with open(markdown_path, 'r', encoding='utf-8') as file:
         markdown_content = file.read()
 
+    # Convert Markdown to HTML
+    html_content = markdown2.markdown(markdown_content, extras=["mathjax"])
+
     # Serialize navbar_content to JSON
     navbar_content_json = json.dumps(navbar_content)
-
-    # Use pyppeteer to load showdown.js
-    browser = await launch()
-    page = await browser.newPage()
-    await page.addScriptTag({'url': 'https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js'})
-
-    # Convert Markdown to HTML using showdown.js
-    html_content = await page.evaluate('''(markdown) => {
-        const converter = new showdown.Converter();
-        return converter.makeHtml(markdown);
-    }''', markdown_content)
-
-    await browser.close()
 
     # HTML template with JavaScript for navbar
     html_template = f"""
@@ -59,7 +57,8 @@ async def convert_markdown_to_html(markdown_path, navbar_content):
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
         <title></title>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </head>
     <body>
         <button id="toggleNav" class="hamburger">
@@ -86,6 +85,7 @@ async def convert_markdown_to_html(markdown_path, navbar_content):
     </html>
     """
 
+    # Determine the new HTML file path and write the final HTML content
     # Determine the new HTML file path
     md_name = markdown_path.split('/')
     md_name[-1] = md_name[-1].replace('.md', '.html')  # Change the extension to .html
@@ -95,25 +95,9 @@ async def convert_markdown_to_html(markdown_path, navbar_content):
     # Write the final HTML content to the new file
     with open(html_file_path, "w", encoding='utf-8') as file:
         file.write(html_template)
-
     return html_file_path
 
-
-
-
 def convplease(path, navbarcontent):
-    lol = asyncio.run(convert_markdown_to_html(path, navbarcontent))
-    return lol
-''''
-if __name__ == "__main__":
+    html_file_path = convert_markdown_to_html(path, navbarcontent)
+    return html_file_path
 
-    path = "/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/0JEtbFtfLD.md"
-    sample= [
-    {'title': "Introduction", 'link': "some-link" },
-    {'title': "What you should already know", 'link': "some-link" },
-    {'title': "JavaScript and Java", 'link': "some-link" },
-    {'title': "Hello World", 'link': "some-link" },
-    {'title': "Variables", 'link': "some-link" },
-]
-    sex=convplease(path, sample)
-    print(sex)'''

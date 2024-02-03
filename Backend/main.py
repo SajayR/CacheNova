@@ -6,6 +6,8 @@ import string
 #import axios
 from flask import Flask, request, jsonify
 import json
+import asyncio
+from threading import Thread
 #from gottadealwithfrontend import subjectlink
 client = MongoClient('localhost', 27017)
 db = client['Nova']
@@ -36,6 +38,7 @@ def chaos(prompt, session_id):
         print(subject)
         thread = threading.Thread(target=run_threadchaos, args=(cleanprompt, subject))
         thread.start()
+        thread.join()
     return "Processing complete"
 
 '''
