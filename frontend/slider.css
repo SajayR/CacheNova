@@ -5,12 +5,13 @@ body {
 }
 
 .Part2 {
-  background-color: black;
   min-height: 100vh; /* Set minimum height to viewport height */
   display: flex;
   flex-direction: column; /* Stack containers vertically */
   align-items: center; /* Center containers horizontally */
   justify-content: center; /* Center containers vertically */
+  position: relative; /* Allows z-index to work */
+  z-index: 2;
 }
 
 .Container1, .Container2, .Container3, .Container4, .Container5 {
@@ -44,7 +45,7 @@ body {
   width: 70px;
   text-align: center;
   border-radius: 10px;
-  transition: all 0.5s ease; 
+  transition: all 0.5s ease;    
 }
 
 .Container1 .Button:hover, .Container2 .Button:hover, .Container3 .Button:hover, .Container4 .Button:hover, .Container5 .Button:hover {
@@ -92,3 +93,9 @@ body {
   color: white;
   font-family: 'Sofia Sans Semi Condensed', sans-serif;
 }
+
+#page-wrapper{
+    position: relative;
+    width: 100%;
+}
+
