@@ -59,6 +59,7 @@ async def convert_markdown_to_html(markdown_path, navbar_content):
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
         <title></title>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML"></script>
     </head>
     <body>
         <button id="toggleNav" class="hamburger">
@@ -80,6 +81,7 @@ async def convert_markdown_to_html(markdown_path, navbar_content):
         {scriptcontentpart}
         </script>
         <script src="one.js"></script>
+        
     </body>
     </html>
     """
@@ -102,10 +104,10 @@ async def convert_markdown_to_html(markdown_path, navbar_content):
 def convplease(path, navbarcontent):
     lol = asyncio.run(convert_markdown_to_html(path, navbarcontent))
     return lol
-
+''''
 if __name__ == "__main__":
 
-    path = "/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/0yaQ6iSkEv.md"
+    path = "/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/0JEtbFtfLD.md"
     sample= [
     {'title': "Introduction", 'link': "some-link" },
     {'title': "What you should already know", 'link': "some-link" },
@@ -114,4 +116,4 @@ if __name__ == "__main__":
     {'title': "Variables", 'link': "some-link" },
 ]
     sex=convplease(path, sample)
-    print(sex)
+    print(sex)'''
