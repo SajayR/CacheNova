@@ -64,13 +64,13 @@ def getsubfields(subject, prompt) -> dict:   #{1: "Gravitational Constant", 2: "
     )
     return list(json.loads(response.choices[0].message.content).values())
 
-def getsubtopics(subject, prompt) -> dict:   #{1: "Gravitational Constant", 2: "Gravitational Field", 3: "Gravitational Potential"}
+def getsubtopics(subfield, subject, prompt) -> dict:   #{1: "Gravitational Constant", 2: "Gravitational Field", 3: "Gravitational Potential"}
     response = client.chat.completions.create(
     model="gpt-3.5-turbo-0125",
     response_format={ "type": "json_object" },
     messages=[
-        {"role": "system", "content": "You are a co-writer on a university book. Your job is to decide subsections for a chapter that covers every topic important to gaining extremely deep understanding of the topic"},
-        {"role": "user", "content": "You are supposed to write the suitable sub-sections of the main section of the chapter in the chapter of Gravitation for the book of physics. You will be tipped 20 dollars for the job. Return a json object with incrementing numbers as keys(starting from 0) and the names of the section as values."},
+        {"role": "system", "content": "You are a co-writer on a university book. Your job is to decide subtopics on a field of the given subject to be put in a book."},
+        {"role": "user", "content": f"You are supposed to write all the important subtopics for an academic book on {subfield} of subject {subject}. You will be tipped 20 dollars for the job. Return a json object with incrementing numbers as keys(starting from 0) and the names of the section as values."},
     ]
     )
     return list(json.loads(response.choices[0].message.content).values())
@@ -92,6 +92,7 @@ def get_subsections(subject, subfield, subtopic):
 
 def generatepages(subject:str, subfield:str, subtopics: list):
     listoflinks_tosubtopicpages=[]
+    print(subtopics)
     for subtopic in subtopics:
         filename = generate_random_string()
         with open(f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md", "w") as md_file:  # Open a markdown file for writing
@@ -108,7 +109,7 @@ def generatepages(subject:str, subfield:str, subtopics: list):
                     )
                     md_file.write(res.choices[0].message.content + "\n\n")  # Write the content to the markdown file
                 else:
-                    sec = subtopics[str(i)]
+                    sec = subsections[i]
                     res = client.chat.completions.create(
                     model="gpt-3.5-turbo-0125",
                     messages=[

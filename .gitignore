@@ -1,0 +1,4 @@
+.DS_Store
+Backend/.DS_Store
+Backend/mddatacluster/*
+Backend/togetherai/__pycache__/*

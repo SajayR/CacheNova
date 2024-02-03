@@ -28,7 +28,7 @@ def chaos(prompt):
         print(subject)
         thread = threading.Thread(target=run_threadchaos, args=(cleanprompt, subject))
         thread.start()
-        thread.join()
+        
             
     #link = omen.getsubjectlink(subjects)
     #return(link)
@@ -39,6 +39,6 @@ def chaos(prompt):
 if __name__=="__main__":
     #prompt=frontendselamadarchod
     print("Hey")
-    chaos("Transfer Learning")
+    chaos("Deep learning")
     #chaos(prompt)
     
