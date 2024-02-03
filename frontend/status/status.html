@@ -3,57 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-xW1ZQxjWeU/DkSXcWJEl3gSk0Ucj2z5k3TWb8BsBpLEZ/4V9To8eHtNHSp5P4w6pN8+0t9V5RsKCsMJ1v8J0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Status</title>
-  <!-- Link to Swiper CSS -->
   <link rel="stylesheet" href="status.css">
 </head>
 <body>
-<script>
-  // Function to create and append cards
-  function createCards() {
-    var container = document.body; // Get the body element
+  <div class="header">Back-End Log</div>
 
-    // Loop to create 50 cards
-    for (var i = 0; i < 52; i++) {
-      if (i % 4 === 0) { // Create a new row container for every 4 cards
-        var row = document.createElement('div');
-        row.classList.add('row');
-        container.appendChild(row);
-      }
+  <script>
+    // Define the demo data directly in the HTML
+    var demoData = [
+      { "name": "Field 1", "code": "ABC123", "isDone": true },
+      { "name": "Field 2", "code": "XYZ456", "isDone": false },
+      { "name": "Field 3", "code": "DEF789", "isDone": false },
+      // Add more data as needed
+    ];
 
-     // ... (your existing JavaScript) ...
+    // Function to update cards with the demo data
+    function updateCards() {
+      var container = document.body;
 
-var card = document.createElement('div'); 
-card.classList.add('card'); 
+      container.innerHTML = '<div class="header">Back-End Log</div>';
 
-var iconContainer = document.createElement('div'); // Create a div for the icon container
-iconContainer.classList.add('icon-container'); // Add the 'icon-container' class
-var loadingIcon = document.createElement('div'); // Create a div for the loading icon
-loadingIcon.classList.add('loading-icon', 'pendulum'); // Add classes for the loading icon
-iconContainer.appendChild(loadingIcon); // Append the loading icon to the icon container
+      var row; // Initialize the row outside the loop
 
-var description = document.createElement('div'); // Create a div for the description
-description.classList.add('description'); // Add the 'description' class
-var name = document.createElement('div'); // Create a div for the name
-name.classList.add('name'); // Add the 'name' class
-name.textContent = 'Field'; // Set the text content for the name
-var code = document.createElement('code'); // Create a code element
-description.appendChild(iconContainer); // Append the icon container to the description
-description.appendChild(name); // Append the name to the description
-description.appendChild(code); // Append the code to the description
+      demoData.forEach((item, index) => {
+        if (index % 6 === 0) {
+          row = document.createElement('div');
+          row.classList.add('row');
+          container.appendChild(row);
+        }
 
-card.appendChild(description); // Append the description to the card
+        var card = document.createElement('div');
+        card.classList.add('card');
 
-row.appendChild(card); // Append the card to the row
+        var iconContainer = document.createElement('div');
+        iconContainer.classList.add('icon-container');
 
-// ... (your existing JavaScript) ...
+        var loadingIcon = document.createElement('div');
+        loadingIcon.classList.add('loading-icon', 'pendulum');
+        iconContainer.appendChild(loadingIcon);
 
+        var doneIcon = document.createElement('div');
+        doneIcon.classList.add('done-icon');
+        doneIcon.innerHTML = '<i class="fas fa-check"></i>'; // Font Awesome checkmark icon
+        iconContainer.appendChild(doneIcon);
+
+        var description = document.createElement('div');
+        description.classList.add('description');
+
+        var name = document.createElement('div');
+        name.classList.add('name');
+        name.textContent = item.name;
+
+        var code = document.createElement('code');
+        code.textContent = item.code;
+
+        if (item.isDone) {
+          loadingIcon.style.display = 'none'; // Hide loading icon
+          doneIcon.style.display = 'block'; // Show done icon
+        }
+
+        description.appendChild(iconContainer);
+        description.appendChild(name);
+        description.appendChild(code);
+
+        card.appendChild(description);
+        row.appendChild(card);
+      });
     }
-  }
 
-  // Call the function to create cards
-  createCards();
-</script>
-
+    // Call the function to update cards on page load
+    updateCards();
+  </script>
 </body>
 </html>
