@@ -94,6 +94,11 @@ def generatepages(subject:str, subfield:str, subtopics: list):
     listoflinks_tosubtopicpages=[]
     print(subtopics)
     for subtopic in subtopics:
+        #implement the following
+        #if subtopic in db:
+        #   listoflinks_tosubtopicpages.append({subtopic: db[subtopic]})
+        #else:
+
         filename = generate_random_string()
         with open(f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md", "w") as md_file:  # Open a markdown file for writing
             subsections = get_subsections(subject, subfield, subtopic)

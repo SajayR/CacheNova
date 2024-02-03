@@ -25,6 +25,9 @@ def chaos(prompt):
 
     for subject in subjects:
         #subjectpage = generate_random_string()
+        #implement the following
+        #if subject already exists in the db, return the link to the subject page
+        #else, create a new subject page and return the link to the subject page
         print(subject)
         thread = threading.Thread(target=run_threadchaos, args=(cleanprompt, subject))
         thread.start()

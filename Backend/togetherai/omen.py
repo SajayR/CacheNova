@@ -13,6 +13,7 @@ def generate_random_string(length=10):
 
 
 
+    
 
 
 def threadchaos(prompt, subject):
@@ -26,6 +27,10 @@ def threadchaos(prompt, subject):
     subcol = db[subject]
     subcol.insert_one({"subject":subject, "subjectpage": subjectpage, "subfields": subfields})
     for subfield in subfields:
+        #implement the following
+        #if subfield in db:
+        #   listoflinks_tosubfieldpages.append({subfield: db[subfield]})
+        #else:
         subfieldpage = generate_random_string()
         subficol = db[subfield]
         subtopics = zed.getsubtopics(subfield, subject, prompt)
@@ -34,6 +39,11 @@ def threadchaos(prompt, subject):
         #add the following to the subfield collection
         #subfield:[{subtopic1, link1}, {subtopic2, link2}, {subtopic3, link3}]
         zed.generatepages(subject, subfield, subtopics) #should return a list of dicts of name of subtopic as key and link as value
+        #holds the form [{subtopic1: link1}, {subtopic2: link2}, {subtopic3: link3}]
+    
+
+    
+        navbarcontent = [{"title":value} for value in subtopics]
         subficol.insert_one({"subfield":subfield, "subfieldpage": subfieldpage, "subtopics":subtopics})
     
     return None

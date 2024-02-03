@@ -1,22 +1,11 @@
-function fetchAndInsertMarkdown() {
-    fetch('/markdown')
-        .then(response => response.text())
-        .then(markdownData => {
-            var converter = new showdown.Converter();
-            var htmlContent = converter.makeHtml(markdownData);
-            document.getElementById('main-doc').innerHTML = htmlContent;
-        })
-        .catch(error => console.error('Error fetching markdown file:', error));
-}
 
-fetchAndInsertMarkdown();
 
 const exampleNavbarContent = [
-    { id: "introduction", title: "Introduction" },
-    { id: "what_you_should_already_know", title: "What you should already know" },
-    { id: "javascript_and_java", title: "JavaScript and Java" },
-    { id: "hello_world", title: "Hello World" },
-    { id: "variables", title: "Variables" },
+    {title: "Introduction", link: "some-link" },
+    {title: "What you should already know", link: "some-link" },
+    {title: "JavaScript and Java", link: "some-link" },
+    {title: "Hello World", link: "some-link" },
+    {title: "Variables", link: "some-link" },
 ];
 
 function populateNavbar(content) {
@@ -27,7 +16,7 @@ function populateNavbar(content) {
         const listItem = document.createElement('li');
         const link = document.createElement('a');
         link.classList.add('nav-link');
-        link.href = `#${item.id}`;
+        link.href = `#${item.link}`;
         link.textContent = item.title;
         listItem.appendChild(link);
         navbarList.appendChild(listItem);
