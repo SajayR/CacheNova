@@ -61,9 +61,6 @@ def convert_markdown_to_html(markdown_path, navbar_content):
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </head>
     <body>
-        <button id="toggleNav" class="hamburger">
-            <i class="fas fa-bars"></i>
-        </button>
         
         <main id="main-doc">
             {html_content}
