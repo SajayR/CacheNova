@@ -17,6 +17,21 @@ function fadeOutAndNavigate() {
   }, 3000); 
 }
 
+function navigateSlider() {
+  var target_page_url = 'slider.html';
+  
+
+  window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+  });
+  
+  setTimeout(function() {
+      window.location.href = target_page_url;
+  }, 300); 
+}
+
+
 
 
 
