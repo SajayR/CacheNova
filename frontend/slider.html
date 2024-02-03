@@ -72,6 +72,9 @@
   </style>
 </head>
 <body>
+  <a href="explore.html">
+  <button id="explore-button">Explore</button>
+</a>
     <div id="page-wrapper">
     <div id="particles-js"></div>
     <div class="Part2">
@@ -100,9 +103,8 @@
         var buttonDiv = document.createElement('div');
         buttonDiv.classList.add('Button');
         var buttonP = document.createElement('p');
-        buttonP.textContent = 'View more';
-        buttonDiv.appendChild(buttonP);
-        containerDiv.appendChild(buttonDiv);
+
+
 
         for (var j = 1; j <= numItemsPerSection; j++) {
             var itemDiv = document.createElement('div');
