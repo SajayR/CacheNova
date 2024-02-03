@@ -15,6 +15,7 @@ import random
 import string
 from gottadealwithfrontend import converter
 from pymongo import MongoClient
+import threading
 client = MongoClient('localhost', 27017)
 db = client['Nova']
 #subficol = db['subfields']
@@ -50,8 +51,8 @@ def getsubjects(prompt: str) -> list:  #["Physics", "Mathematics", "Chemistry"]
     model="gpt-3.5-turbo-0125",
     response_format={ "type": "json_object" },
     messages=[
-        {"role": "system", "content": "You are a librarian that helps students find books. Your job is to find the most relevant subjects to the given prompt."},
-        {"role": "user", "content": f"The student's prompt is {prompt}. You are supposed to find the most relevant subjects to the given prompt. You will be tipped 20 dollars for the job. Return a json with incrementing numbers as keys(starting from 0) and subject names as values."},
+        {"role": "system", "content": "You are a librarian that helps students find books. Your job is to find the most relevant and non-overlapping subjects to the given prompt."},
+        {"role": "user", "content": f"The student's prompt is {prompt}. You are supposed to find the most relevant and non-overlapping subjects to the given prompt. The subjects should not be a part of one another. You will be tipped 20 dollars for the job. Return a json with incrementing numbers as keys(starting from 0) and subject names as values."},
     ]
     )
     return list(json.loads(response.choices[0].message.content).values())
@@ -95,7 +96,7 @@ def get_subsections(subject, subfield, subtopic):
     return list(json.loads(response.choices[0].message.content).values())
 
 
-
+'''
 
 def generatepages(subject:str, subfield:str, subtopics: list, subtopiclinks: list, navbarcontent: list):
     listoflinks_tosubtopicpages=[]
@@ -140,4 +141,63 @@ def generatepages(subject:str, subfield:str, subtopics: list, subtopiclinks: lis
                     listoflinks_tosubtopicpages.append({subtopic: f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md"})
 
     #listoflinks_tosubtopicpages = [{'title': subtopic, 'link': converter.convplease(f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md", navbarcontent)} for subtopic in subtopics]
+    return listoflinks_tosubtopicpages'''
+
+
+
+import threading
+
+def generate_subtopic_page(subject, subfield, subtopic, filename, navbarcontent):
+    subsections = get_subsections(subject, subfield, subtopic)
+    with open(f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md", "w") as md_file:
+        for i in range(len(subsections)):
+            if i != len(subsections) - 1:
+                sec = subsections[i]
+                next_sec = subsections[i + 1]
+            else:
+                sec = subsections[i]
+                next_sec = None
+
+            prompt = f"You are a co-writer on a university book. When asked to write a section, you will write a lengthy, detailed, and well-researched section on the topic. You are supposed to write the section {sec} of the main section of the sub-chapter {subtopic} in the chapter of {subfield} for the book of {subject}."
+            if next_sec:
+                prompt += f" End the section by setting up a smooth transition into the next topic: {next_sec}."
+            else:
+                prompt += " This is the last section of the sub-chapter. End the sub-chapter with a proper concluding paragraph."
+            prompt += " Make sure the output is in pure markdown."
+
+            res = openai_client.chat.completions.create(
+                model="gpt-3.5-turbo-0125",
+                messages=[
+                    {"role": "system", "content": "You are a co-writer on a university book. When asked to write a section, you will write an extremely lengthy, detailed, and well-researched section on the topic, properly formatted with markdown format"},
+                    {"role": "user", "content": prompt}
+                ]
+            )
+            md_file.write(res.choices[0].message.content + "\n\n")
+
+    subficol = db[subfield]
+    subficol.update_one(
+        {"subfield": subfield},
+        {"$push": {"subtopics": {"title": subtopic, "link": converter.convplease(f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md", navbarcontent)}}},
+        upsert=True
+    )
+    return {subtopic: f"/Users/ciscorrr/Documents/CisStuff/curr/CacheNova/Backend/mddatacluster/{filename}.md"}
+
+def generatepages(subject: str, subfield: str, subtopics: list, subtopiclinks: list, navbarcontent: list):
+    listoflinks_tosubtopicpages = []
+    threads = []
+
+    for subtopic in subtopics:
+        filename = subtopiclinks[subtopic]
+        thread = threading.Thread(target=generate_subtopic_page, args=(subject, subfield, subtopic, filename, navbarcontent))
+        threads.append(thread)
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+
+    # After all threads have completed, gather the links
+    # This part needs to be adjusted based on how you collect the results from threads
+    # For simplicity, assuming each thread updates a shared or global structure (be cautious with thread safety)
+    # Alternatively, you could use a thread-safe structure like queue.Queue to collect results from threads
+
     return listoflinks_tosubtopicpages

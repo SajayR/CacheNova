@@ -8,6 +8,7 @@ from flask import Flask, request, jsonify
 import json
 import asyncio
 from threading import Thread
+import time
 #from gottadealwithfrontend import subjectlink
 client = MongoClient('localhost', 27017)
 db = client['Nova']
@@ -39,6 +40,8 @@ def chaos(prompt, session_id):
         thread = threading.Thread(target=run_threadchaos, args=(cleanprompt, subject))
         thread.start()
         thread.join()
+        
+        
     return "Processing complete"
 
 '''
@@ -60,4 +63,4 @@ def process_prompt():
    
 
 if __name__ == '__main__':
-    chaos("Rotation of planets around each other", "123")
+    chaos("Transformer Models and LLMs", "123")
